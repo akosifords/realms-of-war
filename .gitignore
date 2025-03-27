@@ -14,10 +14,6 @@ node_modules
 # Firebase config with API keys
 public/firebase-config.js
 
-# Build files
-dist
-build
-
 # IDE and editor files
 .vscode
 .idea
