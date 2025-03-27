@@ -46,12 +46,17 @@ const UnityGame: React.FC<UnityGameProps> = ({ width = '100%', height = '100%', 
   const [mounted, setMounted] = useState(false);
   const [unityReady, setUnityReady] = useState(false);
   
+  // Get the base URL with proper handling for development vs production
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? '/realms-of-war/'  // GitHub Pages URL
+    : '/';               // Development URL
+  
   // Unity context with proper configuration
   const unityContext = useUnityContext({
-    loaderUrl: `${import.meta.env.BASE_URL}build/mapeditor/Build.loader.js`,
-    dataUrl: `${import.meta.env.BASE_URL}build/mapeditor/Build.data`,
-    frameworkUrl: `${import.meta.env.BASE_URL}build/mapeditor/Build.framework.js`,
-    codeUrl: `${import.meta.env.BASE_URL}build/mapeditor/Build.wasm`,
+    loaderUrl: `${baseUrl}build/mapeditor/Build.loader.js`,
+    dataUrl: `${baseUrl}build/mapeditor/Build.data`,
+    frameworkUrl: `${baseUrl}build/mapeditor/Build.framework.js`,
+    codeUrl: `${baseUrl}build/mapeditor/Build.wasm`,
     webglContextAttributes: {
       preserveDrawingBuffer: true
     }

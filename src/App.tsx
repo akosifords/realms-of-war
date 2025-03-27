@@ -62,16 +62,21 @@ function App() {
   }, [loading]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      
-      // Add a small delay to ensure smooth loading experience
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    });
+    try {
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+        
+        // Add a small delay to ensure smooth loading experience
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      });
 
-    return () => unsubscribe();
+      return () => unsubscribe();
+    } catch (error) {
+      console.error("Error in auth state change:", error);
+      setLoading(false);
+    }
   }, []);
 
   if (loading) {
@@ -87,7 +92,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router basename="/">
       <div className="w-full min-h-screen">
         <Routes>
           <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Home />} />
