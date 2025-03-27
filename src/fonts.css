@@ -1,0 +1,10 @@
+/* Font utility classes using Google Fonts */
+.font-jersey {
+  font-family: 'Jersey 15', sans-serif;
+  font-weight: 400;
+}
+
+.font-jersey-10 {
+  font-family: 'Jersey 10', sans-serif;
+  font-weight: 400;
+} 
